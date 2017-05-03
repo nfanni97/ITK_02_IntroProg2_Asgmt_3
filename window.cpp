@@ -22,6 +22,7 @@ void Window :: event_loop() {
         if (focus!=-1) {
             widgets[focus]->handle(ev);
         }
+        gout<<move_to(0,0)<<color(255,255,255)<<box(_size_x,_size_y);
         for (size_t i=0;i<widgets.size();i++) {
             if(i==focus) widgets[i]->draw(255,128,0);
             else widgets[i]->draw(0,0,0);
