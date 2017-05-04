@@ -18,3 +18,7 @@ LiberationSans-Regular\.ttf
 LiberationSerif-BoldItalic\.ttf
 
 *.dll
+
+statictext\.cpp
+
+statictext\.hpp
