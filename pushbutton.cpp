@@ -3,8 +3,8 @@
 using namespace genv;
 using namespace std;
 
-PushButton :: PushButton(Window * parent, int x, int y, int sx, int sy, std::string s, std::string id)
-    : Widget(x,y,sx,sy)
+PushButton :: PushButton(Window *parent, int x, int y, int sx, int sy, std::string s, std::string id)
+    : Widget(x,y,sx,sy,true)
     {
         _parent=parent;
         _text=s;
