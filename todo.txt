@@ -1,9 +1,6 @@
 MUST:
-- call is_correct when a value changes (eliminate button)
-- given values unchangeable (static?)
-- load field
-- write newly input value in red if incorrect
-- write all incorrect values in red
+- eliminate button?
+- given value with different font-color
 
 OTPIONAL:
 - start, game over screen
