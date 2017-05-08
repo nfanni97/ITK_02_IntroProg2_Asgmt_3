@@ -3,7 +3,7 @@
 using namespace genv;
 
 CheckBox::CheckBox(int x, int y, int sx, int sy)
-    : Widget(x,y,sx,sy), _checked(false) {
+    : Widget(x,y,sx,sy,true), _checked(false) {
     }
 
 void CheckBox::draw(int r, int g, int b) const

@@ -13,6 +13,7 @@ public:
     List(int x, int y, std::vector<std::string> options, int sx, int lines);
     virtual void draw(int r, int g, int b) const;
     virtual void handle(genv::event ev);
+    virtual std::string get_active() const;
     virtual void add(std::string t);
     virtual void del();//kiválasztott elemet törli
     virtual void write_to(std::ofstream & output) const;

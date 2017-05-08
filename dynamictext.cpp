@@ -5,7 +5,7 @@ using namespace genv;
 using namespace std;
 
 DynamicText :: DynamicText(int x, int y, int sx, int sy)
-    : Widget (x,y,sx,sy), _text("") {
+    : Widget (x,y,sx,sy,true), _text("") {
 }
 
 void DynamicText :: draw(int r, int g, int b) const
