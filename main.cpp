@@ -4,10 +4,8 @@
 #include "numeric.hpp"
 #include "statictext.hpp"
 #include "gamemaster.hpp"
-#include "pushbutton.hpp"
 #include "game.hpp"
 
-#include <iostream>
 #include <vector>
 #include <fstream>
 #include <time.h>
@@ -60,7 +58,6 @@ int main()
     int fieldn=rand()%5+1;
     string field=(fieldn<10)?"0":"";
     field+=num2str(fieldn)+".txt";
-    cout<<field;
     GameMaster gm;
     Sudoku *sudoku=new Sudoku(XX,YY,field, gm);
     sudoku->event_loop();
