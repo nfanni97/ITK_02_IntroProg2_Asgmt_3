@@ -22,7 +22,7 @@ bool GameMaster::is_correct(int c,int v,std::vector<int> field) const {
 
 bool GameMaster::is_finished(std::vector<int> field) const {
     bool yes=true;
-    for(int i=0;i<field.size() && yes;i++) if(field[i]==0) yes=!yes;
+    for(int i=0;i<field.size() && yes;i++) if(field[i]==0 || !is_correct(i,field[i],field)) yes=!yes;
     return yes;
 }
 
