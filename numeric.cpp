@@ -31,7 +31,10 @@ void Numeric :: draw(int r, int g, int b) const {
     gout<<move_to(_x,_y)<<box(_size_x,_size_y)<<move_to(_x+2,_y+2)<<color(255,255,255)<<box(_size_x-4,_size_y-4);
     if(_n!=0) {
         gout<<move_to(_x+(_size_x-gout.twidth(num2str(_n)))/2,_y+(_size_y-gout.cascent()-gout.cdescent())/2);
-        if(_correct) gout<<color(0,0,0);
+        if(_correct) {
+            if(_focusable) gout<<color(0,0,0);
+            else gout<<color(0,0,255);
+        }
         else gout<<color(255,0,0);
         gout<<text(num2str(_n));
     }
