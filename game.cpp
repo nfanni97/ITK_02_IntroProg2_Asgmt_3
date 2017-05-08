@@ -1,10 +1,20 @@
-#include "window.hpp"
+#include "game.hpp"
 #include "graphics.hpp"
 
 using namespace genv;
 
-void Window :: event_loop() {
+Game::Game(int x, int y, GameMaster gm) {
+    _size_x=x;
+    _size_y=y;
+    _gm=gm;
+}
+
+void Game::game_logic() {}
+
+void Game :: event_loop() {
     event ev;
+    gout.open(_size_x,_size_y);
+    gout.load_font("LiberationSerif-BoldItalic.ttf",30);
     int f=-1;
     while(gin >> ev && ev.keycode!=key_escape) {
         if(ev.type == ev_key && ev.keycode == key_tab) {
@@ -34,6 +44,7 @@ void Window :: event_loop() {
             if(i==f) widgets[i]->draw(255,128,0);
             else widgets[i]->draw(0,0,0);
         }
+        game_logic();
         gout<<refresh;
     }
 }

@@ -9,7 +9,6 @@ protected:
     std::vector<Widget*> widgets;
     int _size_x,_size_y;
 public:
-    virtual void esemeny(std::string mitortent){};
     void event_loop();
 };
 

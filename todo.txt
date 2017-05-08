@@ -1,0 +1,12 @@
+MUST:
+? compiles, runs, foolproof
++ contains widgets, only widgets draw
++ GM in separate class
++ no graphicslib in main()
++ GUI and game logic in separate classes
++ github
++ load field from file
++ indicates incorrect values
+
+OPTIONAL:
+generating field with unique solution

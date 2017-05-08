@@ -2,14 +2,14 @@
 #define PUSHBUTTON_H_INCLUDED
 
 #include "widgets.hpp"
-#include "window.hpp"
+#include <functional>
 
 class PushButton : public Widget {
 protected:
-    Window *_parent;
-    std::string _text,_id;
+    std::function<void()> _functor;
+    std::string _text;
 public:
-    PushButton(Window * parent, int x, int y, int sx, int sy, std::string s, std::string id);
+    PushButton(int x, int y, int sx, int sy, std::string s, std::function<void()> f);
     virtual void draw(int r, int g, int b) const;
     virtual void handle(genv::event ev);
     virtual void action();
