@@ -1,4 +1,5 @@
 #include "gamemaster.hpp"
+
 #include <vector>
 #include <fstream>
 
