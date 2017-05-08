@@ -5,54 +5,64 @@
 #include "statictext.hpp"
 #include "gamemaster.hpp"
 #include "pushbutton.hpp"
+#include "game.hpp"
 
 #include <iostream>
 #include <vector>
 #include <fstream>
+#include <time.h>
+#include <cstdlib>
+#include <sstream>
 
 using namespace genv;
 using namespace std;
 
-const int XX=500,YY=500;//size of window
+const int XX=300,YY=300;//size of window
 const int C=30;//size of cells (square)
 
-class MyWindow : public Window {
+class Sudoku : public Game {
 public:
     vector<Numeric *> cells;
-    PushButton *test;
-    GameMaster gm;
-    MyWindow(int x,int y,string filename) {
-        _size_x=x;
-        _size_y=y;
-        gm=GameMaster();
+    Sudoku(int x,int y,string filename,GameMaster gm) : Game(x,y,gm) {
         vector<int> given=gm.load_field(filename);
         for(int i=0;i<81;i++) {
             Numeric *temp;
-            if(given[i]!=0) temp=new Numeric(i%9*C+(i%9)/3*5,i/9*C+i/27*5,C,C,0,9,false,given[i]);
-            else temp=new Numeric(i%9*C+(i%9)/3*5,i/9*C+i/27*5,C,C,0,9,true);
+            if(given[i]!=0) temp=new Numeric(10+i%9*C+(i%9)/3*5,10+i/9*C+i/27*5,C,C,0,9,false,given[i]);
+            else temp=new Numeric(10+i%9*C+(i%9)/3*5,10+i/9*C+i/27*5,C,C,0,9,true);
             cells.push_back(temp);
             widgets.push_back(temp);
         }
-        test=new PushButton(300,300,gout.twidth("Check")+10,30,"Check",[this](){this->check();});
-        widgets.push_back(test);
-        gm=GameMaster();
+    }
+    void game_logic() {
+        vector<int> _field=make_field();
+        for(int i=0;i<81;i++) if(_field[i]!=0) cells[i]->set_correct(_gm.is_correct(i,_field[i],_field));
+        if(_gm.is_finished(_field)) {
+            string f1="Hurray, you did it!";
+            string f2="Press Esc to exit";
+            StaticText *finish1=new StaticText((_size_x-gout.twidth(f1))/2,_size_y/2-gout.cascent(),gout.twidth(f1),gout.cascent()+gout.cdescent(),f1);
+            StaticText *finish2=new StaticText((_size_x-gout.twidth(f2))/2,_size_y/2+4,gout.twidth(f2),gout.cascent()+gout.cdescent(),f2);
+            finish1->draw(255,128,0);
+            finish2->draw(255,128,0);
+        }
+
     }
     vector<int> make_field() {
         vector<int> result;
         for(int i=0;i<cells.size();i++) result.push_back(cells[i]->get_num());
         return result;
     }
-    void check() {
-        vector<int> field=make_field();
-        for(int i=0;i<81;i++) if(field[i]!=0) cells[i]->set_correct(gm.is_correct(i,field[i],field));
-    }
 };
 
+string num2str(int a) ;
 int main()
 {
-    gout.open(XX,YY);
-    gout.load_font("LiberationSerif-BoldItalic.ttf",20);
-    MyWindow *mywindow=new MyWindow(XX,YY,"test2.txt");
-    mywindow->event_loop();
+    srand(time(0));
+    int fieldn=rand()%5+1;
+    string field=(fieldn<10)?"0":"";
+    field+=num2str(fieldn)+".txt";
+    cout<<field;
+    GameMaster gm;
+    Sudoku *sudoku=new Sudoku(XX,YY,field, gm);
+    sudoku->event_loop();
     return 0;
 }
