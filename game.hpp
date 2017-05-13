@@ -8,9 +8,10 @@
 class Game : public Window {
 protected:
     GameMaster _gm;
+    int _font;
     virtual void game_logic();
 public:
-    Game(int x, int y, GameMaster gm);
+    Game(int x, int y, GameMaster gm, int font);
     void event_loop();
 };
 

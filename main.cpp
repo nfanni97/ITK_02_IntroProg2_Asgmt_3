@@ -2,7 +2,6 @@
 #include "window.hpp"
 #include "widgets.hpp"
 #include "numeric.hpp"
-#include "statictext.hpp"
 #include "gamemaster.hpp"
 #include "game.hpp"
 
@@ -15,13 +14,14 @@
 using namespace genv;
 using namespace std;
 
-const int XX=300,YY=300;//size of window
-const int C=30;//size of cells (square)
+const int C=50;//size of cells (square)
+const int F=40;//font size
+const int XX=9*C+30,YY=9*C+30;//size of window
 
 class Sudoku : public Game {
 public:
     vector<Numeric *> cells;
-    Sudoku(int x,int y,string filename,GameMaster gm) : Game(x,y,gm) {
+    Sudoku(int x,int y,string filename,GameMaster gm,int font) : Game(x,y,gm,font) {
         vector<int> given=gm.load_field(filename);
         for(int i=0;i<81;i++) {
             Numeric *temp;
@@ -51,7 +51,7 @@ int main()
     string field=(fieldn<10)?"0":"";
     field+=num2str(fieldn)+".txt";
     GameMaster gm;
-    Sudoku *sudoku=new Sudoku(XX,YY,field, gm);
+    Sudoku *sudoku=new Sudoku(XX,YY,field, gm, F);
     //Sudoku *sudoku=new Sudoku(XX,YY,"finished.txt", gm);
     sudoku->event_loop();
     return 0;

@@ -3,10 +3,11 @@
 
 using namespace genv;
 
-Game::Game(int x, int y, GameMaster gm) {
+Game::Game(int x, int y, GameMaster gm, int font) {
     _size_x=x;
     _size_y=y;
     _gm=gm;
+    _font=font;
 }
 
 void Game::game_logic() {}
@@ -14,7 +15,7 @@ void Game::game_logic() {}
 void Game :: event_loop() {
     event ev;
     gout.open(_size_x,_size_y);
-    gout.load_font("LiberationSerif-BoldItalic.ttf",30);
+    gout.load_font("LiberationSerif-BoldItalic.ttf",_font);
     int f=-1;
     while(gin >> ev && ev.keycode!=key_escape) {
         if(ev.type == ev_key && ev.keycode == key_tab) {
