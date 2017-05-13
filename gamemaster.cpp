@@ -19,12 +19,6 @@ bool GameMaster::is_correct(int c,int v,std::vector<int> field) const {
     return good;
 }
 
-bool GameMaster::is_finished(std::vector<int> field) const {
-    bool yes=true;
-    for(int i=0;i<field.size() && yes;i++) if(field[i]==0 || !is_correct(i,field[i],field)) yes=!yes;
-    return yes;
-}
-
 std::vector<int> GameMaster::load_field(std::string filename) const {
     std::vector<int> given;
     std::ifstream f(filename);

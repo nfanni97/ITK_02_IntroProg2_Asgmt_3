@@ -19,7 +19,10 @@ void Game :: event_loop() {
     while(gin >> ev && ev.keycode!=key_escape) {
         if(ev.type == ev_key && ev.keycode == key_tab) {
             if(f!=-1) widgets[f]->unfocus();
-            f=(f+1)%widgets.size();//tabbal is lehet lépkedni
+            f=(f+1)%widgets.size();
+            while(!widgets[f]->is_focusable()) {
+                f=(f+1)%widgets.size();//tabbal is lehet lépkedni
+            }
             widgets[f]->focus();
         }
         if (ev.type == ev_mouse && ev.button==btn_left) {

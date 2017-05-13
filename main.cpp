@@ -25,23 +25,15 @@ public:
         vector<int> given=gm.load_field(filename);
         for(int i=0;i<81;i++) {
             Numeric *temp;
-            if(given[i]!=0) temp=new Numeric(10+i%9*C+(i%9)/3*5,10+i/9*C+i/27*5,C,C,0,9,false,given[i]);
-            else temp=new Numeric(10+i%9*C+(i%9)/3*5,10+i/9*C+i/27*5,C,C,0,9,true);
+            bool changeable=(given[i]==0)?true:false;
+            temp=new Numeric(10+i%9*C+(i%9)/3*5,10+i/9*C+i/27*5,C,C,0,9,changeable,given[i]);
             cells.push_back(temp);
             widgets.push_back(temp);
         }
     }
     void game_logic() {
         vector<int> _field=make_field();
-        for(int i=0;i<81;i++) if(_field[i]!=0) cells[i]->set_correct(_gm.is_correct(i,_field[i],_field));
-        if(_gm.is_finished(_field)) {
-            string f1="Hurray, you did it!";
-            string f2="Press Esc to exit";
-            StaticText *finish1=new StaticText((_size_x-gout.twidth(f1))/2,_size_y/2-gout.cascent(),gout.twidth(f1),gout.cascent()+gout.cdescent(),f1);
-            StaticText *finish2=new StaticText((_size_x-gout.twidth(f2))/2,_size_y/2+4,gout.twidth(f2),gout.cascent()+gout.cdescent(),f2);
-            finish1->draw(255,128,0);
-            finish2->draw(255,128,0);
-        }
+        for(int i=0;i<81;i++) cells[i]->set_correct(_gm.is_correct(i,_field[i],_field));
 
     }
     vector<int> make_field() {
@@ -60,6 +52,7 @@ int main()
     field+=num2str(fieldn)+".txt";
     GameMaster gm;
     Sudoku *sudoku=new Sudoku(XX,YY,field, gm);
+    //Sudoku *sudoku=new Sudoku(XX,YY,"finished.txt", gm);
     sudoku->event_loop();
     return 0;
 }

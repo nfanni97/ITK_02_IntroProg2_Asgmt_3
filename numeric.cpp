@@ -45,7 +45,7 @@ int Numeric::get_num() const {
 }
 
 void Numeric::set_correct(bool to) {
-    _correct=to;
+    _correct=(_n==0)?true:to;
 }
 
 void Numeric :: add(int nn) {//tetszőleges számot hozzáad/elvesz a számból
